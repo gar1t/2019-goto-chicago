@@ -8,6 +8,8 @@
       flags:
         max-depth:
           arg-name: tree-max-depth
+        min-samples-split:
+          arg-name: tree-min-samples-split
       requires:
         - file: kddcup99.csv
       sourcecode:

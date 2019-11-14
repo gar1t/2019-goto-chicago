@@ -8,7 +8,6 @@ Created on Fri Dec  1 15:25:14 2017
 import argparse
 import warnings
 
-#import numpy as np
 import pandas as pd
 
 from sklearn.naive_bayes import GaussianNB
@@ -20,15 +19,11 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 
 from sklearn.model_selection import train_test_split
-#from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate
-
-#from sklearn import metrics
 
 random_seed = 1
 test_split = 0.3
 data = "kddcup99.csv"
-normal = "normal"
 
 def main():
     args = _init_args()
