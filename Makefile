@@ -1,2 +1,2 @@
 lint:
-	python -m pylint -rn -f parseable kddcup99.py
+	python -m pylint -rn -f parseable kdd_classifier.py

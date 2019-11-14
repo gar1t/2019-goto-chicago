@@ -19,9 +19,7 @@ class TrainData:
 def main():
     args = _init_args()
     _init_h2o(args)
-    raw_data = _load_raw_data(args)
-    x_cols, y_col = _prepare_raw_data(raw_data)
-    train_data = _init_train_data(x_cols, y_col, raw_data, args)
+    train_data = _init_train_data(args)
     model = _init_model(args)
     _train_model(model, train_data, args)
     _print_train_results(model)
@@ -30,7 +28,9 @@ def main():
 def _init_args():
     p = argparse.ArgumentParser()
     p.add_argument("--data", default="kddcup99.csv")
-    p.add_argument("--val-split", type=float, default=0.2)
+    p.add_argument(
+        "--val-split", type=float, default=0.2,
+        help="percent data used for validation")
     p.add_argument("--random-seed", type=int, default=42)
     p.add_argument("--learning-rate", type=float, default=0.001)
     p.add_argument("--n-folds", type=int, default=5)
@@ -41,6 +41,11 @@ def _init_args():
 
 def _init_h2o(args):
     h2o.init(min_mem_size=args.h2o_mem)
+
+def _init_train_data(args):
+    raw_data = _load_raw_data(args)
+    x_cols, y_col = _prepare_raw_data(raw_data)
+    return _train_data(x_cols, y_col, raw_data, args)
 
 def _load_raw_data(args):
     return pd.read_csv(args.data)
@@ -56,7 +61,7 @@ def _prepare_raw_data(raw_data):
 def _fit_transform(col):
     return preprocessing.LabelEncoder().fit_transform(col)
 
-def _init_train_data(x_cols, y_col, raw_data, args):
+def _train_data(x_cols, y_col, raw_data, args):
     train_data = h2o.H2OFrame(raw_data)
     for name in raw_data.columns.tolist():
         if raw_data[name].dtypes == "object":
@@ -75,7 +80,6 @@ def _init_model(args):
         seed=args.random_seed)
 
 def _train_model(model, data, _args):
-    # TODO: learning rate
     model.train(
         data.x_cols,
         data.y_col,
