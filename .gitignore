@@ -1,5 +1,6 @@
 dt_surrogate_mojo*
 venv
+output
 .ipynb_checkpoints
 *.pyc
 *.png

@@ -5,6 +5,7 @@ ipywidgets
 jupyterlab
 matplotlib
 pandas
+pylint
 shap
 sklearn
 tqdm
