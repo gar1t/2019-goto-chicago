@@ -2,3 +2,4 @@ dt_surrogate_mojo*
 venv
 .ipynb_checkpoints
 *.pyc
+*.png
