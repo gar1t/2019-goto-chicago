@@ -43,6 +43,10 @@ def _init_args():
     p.add_argument(
         "--model", default="nb",
         choices=["nb", "tree", "forest"])
+    p.add_argument(
+        "--tree-max-depth", type=int, default=None)
+    p.add_argument(
+        "--tree-min-samples-split", type=int, default=2)
     return p.parse_args()
 
 def _init_model(args):
@@ -51,7 +55,10 @@ def _init_model(args):
         return GaussianNB()
     elif args.model == "tree":
         print("Using decision tree classifier")
-        return DecisionTreeClassifier()
+        return DecisionTreeClassifier(
+            max_depth=args.tree_max_depth,
+            min_samples_split=args.tree_min_samples_split,
+        )
     elif args.model == "forest":
         print("Using random forest classifier")
         return RandomForestClassifier()
