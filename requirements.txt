@@ -1,0 +1,9 @@
+flask
+h2o
+ipywidgets
+jupyterlab
+matplotlib
+pandas
+shap
+sklearn
+tqdm
