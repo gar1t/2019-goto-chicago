@@ -20,3 +20,19 @@
         acc: 'Accuracy: (\value)'
         prec: 'Precision: (\value)'
         recall: 'Recall: (\value)'
+
+- model: glm
+  sourcecode:
+    - '*.py'
+    - '*.yml'
+  operations:
+    train:
+      main: kddcup99
+      requires:
+        - file: kddcup99.csv
+    serve:
+      main: serve
+      flags-import: no
+      requires:
+        - operation: train
+          select: output
